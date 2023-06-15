@@ -13,7 +13,10 @@ class Client():
                             gameName=gameName, tagLine=tagLine)['puuid']
         return response
         
-    def get_champion_mastery(self, puuid):
-        response = self.handler('GET', 'champion_mastery', \
-                            puuid=puuid, region=self.region)
+    def get_champion_mastery(self, puuid, championId=None):
+        if championId is None:
+            response = self.handler('GET', 'champion_masteries', region=self.region, puuid=puuid)
+        else:
+            response = self.handler('GET', 'champion_mastery', \
+                                puuid=puuid, championId=championId, region=self.region)
         return response

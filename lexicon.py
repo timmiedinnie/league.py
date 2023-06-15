@@ -29,6 +29,7 @@ class Lexicon():
 
     ENDPOINTS = {
         'account': 'riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}',
-        'champion_mastery': 'lol/champion-mastery/v4/champion-masteries/by-puuid/{puuid}',
+        'champion_masteries': 'lol/champion-mastery/v4/champion-masteries/by-puuid/{puuid}',  # get all champion mastery entries sorted by number of champion points descending
+        'champion_mastery': 'lol/champion-mastery/v4/champion-masteries/by-puuid/{puuid}/by-champion/{championId}' # get a champion mastery by puuid and champion ID.
         # 'data_dragon': 'https://ddragon.leagueoflegends.com/cdn/dragontail-13.11.1.tgz'
     }

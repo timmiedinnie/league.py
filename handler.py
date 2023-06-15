@@ -28,11 +28,12 @@ class Handler():
 
         if validate_args(continent, region):
             self.continent = continent
-            self.region = region
+            self.region = region  # not used? wtf
 
     def __call__(self, method, route, region=None, **params):
         url = self.base.format(region if region is not None else self.continent) + \
             self.endpoints[route].format(**params)
+        
         res = self.sess.request(method, url)
         
         if res.status_code == 200:
