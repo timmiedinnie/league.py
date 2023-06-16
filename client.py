@@ -13,10 +13,16 @@ class Client():
                             gameName=gameName, tagLine=tagLine)['puuid']
         return response
         
-    def get_champion_mastery(self, puuid, championId=None):
-        if championId is None:
+    def get_champion_mastery(self, puuid, championId=None, limit=None):
+        if championId is None and limit is None:
             response = self.handler('GET', 'champion_masteries', puuid=puuid, switch_locale=True)
-        else:
+        elif championId is not None and limit is None:
             response = self.handler('GET', 'champion_mastery', \
                                 puuid=puuid, championId=championId, switch_locale=True)
+        elif championId is None and limit is not None:
+            response = self.handler('GET', 'top_n_champion_masteries', \
+                                puuid=puuid, limit=limit, switch_locale=True)
+        else:
+            raise KeyError('championId and limit cannot be specified at the same time.')
+        
         return response
