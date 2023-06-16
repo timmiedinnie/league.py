@@ -30,8 +30,8 @@ class Handler():
             self.continent = continent
             self.region = region  # not used? wtf
 
-    def __call__(self, method, route, region=None, **params):
-        url = self.base.format(region if region is not None else self.continent) + \
+    def __call__(self, method, route, switch_locale=False, **params):
+        url = self.base.format(self.region if switch_locale else self.continent) + \
             self.endpoints[route].format(**params)
         
         res = self.sess.request(method, url)

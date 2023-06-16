@@ -15,8 +15,8 @@ class Client():
         
     def get_champion_mastery(self, puuid, championId=None):
         if championId is None:
-            response = self.handler('GET', 'champion_masteries', region=self.region, puuid=puuid)
+            response = self.handler('GET', 'champion_masteries', puuid=puuid, switch_locale=True)
         else:
             response = self.handler('GET', 'champion_mastery', \
-                                puuid=puuid, championId=championId, region=self.region)
+                                puuid=puuid, championId=championId, switch_locale=True)
         return response
