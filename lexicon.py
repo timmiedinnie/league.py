@@ -54,9 +54,7 @@ class Lexicon():
 
     _SPECTATOR_V4 = {}
 
-    _DATA_DRAGON = {
-        # 'data_dragon': 'https://ddragon.leagueoflegends.com/cdn/dragontail-13.11.1.tgz'
-    }
+    _DATA_DRAGON = {}
 
     ENDPOINTS = {
         'account': 'riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}',
