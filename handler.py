@@ -28,7 +28,7 @@ class Handler():
 
         if validate_args(continent, region):
             self.continent = continent
-            self.region = region  # not used? wtf
+            self.region = region
 
     def __call__(self, method, route, switch_locale=False, **params):
         url = self.base.format(self.region if switch_locale else self.continent) + \
