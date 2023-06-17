@@ -52,11 +52,15 @@ class Lexicon():
 
     _MATCH_V5 = {}
 
+    _SUMMONER_V4 = {
+        'summoner': 'lol/summoner/v4/summoners/by-name/{summonerName}',  # get a summoner by summoner name
+    }
+
     _SPECTATOR_V4 = {}
 
     _DATA_DRAGON = {}
 
     ENDPOINTS = {
-        'account': 'riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}',
-        **_CHAMPION_MASTERY_V4
+        **_CHAMPION_MASTERY_V4,
+        **_SUMMONER_V4,
     }

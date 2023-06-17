@@ -30,7 +30,7 @@ class Handler():
             self.continent = continent
             self.region = region
 
-    def __call__(self, method, route, switch_locale=False, **params):
+    def __call__(self, method, route, switch_locale=True, **params):
         url = self.base.format(self.region if switch_locale else self.continent) + \
             self.endpoints[route].format(**params)
         
