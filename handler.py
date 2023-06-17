@@ -40,4 +40,4 @@ class Handler():
             return res.json()
         else:
             # res.raise_for_status()
-            raise SystemExit(f'Error: {res.status_code}')
+            raise Exception(f'Error {res.status_code} {res.reason}')
