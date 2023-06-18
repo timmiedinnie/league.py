@@ -34,21 +34,21 @@ class Lexicon():
         'mastery_score': 'lol/champion-mastery/v4/scores/by-puuid/{puuid}',  # get a player's total champion mastery score, which is the sum of individual champion mastery levels
     }
 
-    _CHAMPION_V3 = {}
+    _CHAMPION_V3 = {
+        'champion_rotation': 'lol/platform/v3/champion-rotations',  # get champion rotations, including f2p and low-level f2p rotations
+    }
 
-    _CLASH_V1 = {}
+    # _CLASH_V1 = {}
 
-    _LEAGUE_EXP_V4 = {}
+    _LEAGUE_V4 = {
+        'league_entries': 'lol/league/v4/entries/by-summoner/{summonerId}',  # get league entries in all queues for a given summonerId
+    }
 
-    _LEAGUE_V4 = {}
+    # _LEAGUE_EXP_V4 = {}
 
     _LOL_CHALLENGES_V1 = {}
 
-    _LOL_STATUS_V4 = {}
-
-    _LEAGUE_V4 = {}
-
-    _LEAGUE_EXP_V4 = {}
+    # _LEAGUE_EXP_V4 = {}
 
     _MATCH_V5 = {}
 
@@ -56,11 +56,10 @@ class Lexicon():
         'summoner': 'lol/summoner/v4/summoners/by-name/{summonerName}',  # get a summoner by summoner name
     }
 
-    _SPECTATOR_V4 = {}
-
     _DATA_DRAGON = {}
 
     ENDPOINTS = {
+        **_CHAMPION_V3,
         **_CHAMPION_MASTERY_V4,
         **_SUMMONER_V4,
     }
