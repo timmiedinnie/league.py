@@ -29,4 +29,10 @@ class Client():
     
     def get_mastery_score(self, puuid):
         response = self.handler('GET', 'mastery_score', puuid=puuid)
+        
+        return response
+    
+    def get_champion_rotation(self):
+        response = self.handler('GET', 'champion_rotation')
+        
         return response
