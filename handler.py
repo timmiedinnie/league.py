@@ -33,8 +33,7 @@ class Handler():
 
     def __call__(self, method, route, switch_locale=True, ddragon_route=False, **params):
         if ddragon_route:
-            self.base = Lexicon.ENDPOINTS['dd_root']
-            url = self.base.format(version=self.ddragon_version) + self.endpoints[route]
+            url = self.endpoints['dd_root'].format(version=self.ddragon_version) + self.endpoints[route]
         else:
             url = self.base.format(self.region if switch_locale else self.continent) + \
                 self.endpoints[route].format(**params)
