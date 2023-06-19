@@ -57,7 +57,7 @@ class Lexicon():
     }
 
     _DATA_DRAGON = {
-        'root': 'http://ddragon.leagueoflegends.com/cdn/{version}/',
+        'dd_root': 'http://ddragon.leagueoflegends.com/cdn/{version}/',
         'all_champion_data': 'data/en_US/champion.json',  # get champion data
         # 'champion_data': 'data/en_US/champion/{championName}.json',  # get champion data by champion name
         'items': 'data/en_US/item.json',  # get item data
