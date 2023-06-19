@@ -49,3 +49,8 @@ class Client():
         response = self.handler('GET', 'items', version=self.ddragon_version)
         
         return response
+    
+    def get_summoner_spell_data(self):
+        response = self.handler('GET', 'summoner_spells', version=self.ddragon_version)
+        
+        return response
