@@ -14,9 +14,10 @@ def validate_args(*args):
 
 
 class Handler():
-    def __init__(self, api_key, continent, region):
+    def __init__(self, api_key, continent, region, ddragon_version='13.12.1'):
         self.endpoints = Lexicon.ENDPOINTS
-        self.base = 'https://{}.api.riotgames.com/'
+        self.ddragon_version = ddragon_version
+        self.base = 'https://{}.api.riotgames.com/' 
         self.sess = requests.Session()
         self.sess.headers.update(
             {
@@ -30,9 +31,12 @@ class Handler():
             self.continent = continent
             self.region = region
 
-    def __call__(self, method, route, switch_locale=True, **params):
-        url = self.base.format(self.region if switch_locale else self.continent) + \
-            self.endpoints[route].format(**params)
+    def __call__(self, method, route, switch_locale=True, ddragon_route=False, **params):
+        if ddragon_route:
+            url = self.endpoints['dd_root'].format(version=self.ddragon_version) + self.endpoints[route]
+        else:
+            url = self.base.format(self.region if switch_locale else self.continent) + \
+                self.endpoints[route].format(**params)
         
         res = self.sess.request(method, url)
         
