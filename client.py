@@ -2,11 +2,13 @@ from handler import Handler
 
 
 class Client():
-    def __init__(self, api_key, continent='ASIA', region='SG2'):
+    def __init__(self, api_key, continent='ASIA', region='SG2', ddragon_version='13.12.1'):
         self.api_key = api_key
         self.continent = continent
         self.region = region
+        self.ddragon_version = ddragon_version
         self.handler = Handler(self.api_key, self.continent, self.region)
+        
 
     def get_summoner(self, summoner_name):
         response = self.handler('GET', 'summoner', summonerName=summoner_name)
@@ -34,5 +36,16 @@ class Client():
     
     def get_champion_rotation(self):
         response = self.handler('GET', 'champion_rotation')
+        
+        return response
+    
+    # data dragon api
+    def get_champion_data(self):
+        response = self.handler('GET', 'all_champion_data', version=self.ddragon_version)
+        
+        return response
+    
+    def get_item_data(self):
+        response = self.handler('GET', 'items', version=self.ddragon_version)
         
         return response

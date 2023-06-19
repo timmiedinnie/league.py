@@ -56,7 +56,13 @@ class Lexicon():
         'summoner': 'lol/summoner/v4/summoners/by-name/{summonerName}',  # get a summoner by summoner name
     }
 
-    _DATA_DRAGON = {}
+    _DATA_DRAGON = {
+        'root': 'http://ddragon.leagueoflegends.com/cdn/{version}/',
+        'all_champion_data': 'data/en_US/champion.json',  # get champion data
+        # 'champion_data': 'data/en_US/champion/{championName}.json',  # get champion data by champion name
+        'items': 'data/en_US/item.json',  # get item data
+        'summoner_spells': 'data/en_US/summoner.json',  # get summoner spell data
+    }
 
     ENDPOINTS = {
         **_CHAMPION_V3,
