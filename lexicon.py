@@ -67,5 +67,6 @@ class Lexicon():
     ENDPOINTS = {
         **_CHAMPION_V3,
         **_CHAMPION_MASTERY_V4,
+        **_DATA_DRAGON,
         **_SUMMONER_V4,
     }
