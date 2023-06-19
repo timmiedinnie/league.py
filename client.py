@@ -7,6 +7,7 @@ class Client():
         self.continent = continent
         self.region = region
         self.handler = Handler(self.api_key, self.continent, self.region)
+        
 
     def get_summoner(self, summoner_name):
         response = self.handler('GET', 'summoner', summonerName=summoner_name)
@@ -34,5 +35,21 @@ class Client():
     
     def get_champion_rotation(self):
         response = self.handler('GET', 'champion_rotation')
+        
+        return response
+    
+    # data dragon api
+    def get_champions(self):
+        response = self.handler('GET', 'all_champion_data', ddragon_route=True)
+        
+        return response
+    
+    def get_items(self):
+        response = self.handler('GET', 'items', ddragon_route=True)
+        
+        return response
+    
+    def get_summoner_spells(self):
+        response = self.handler('GET', 'summoner_spells', ddragon_route=True)
         
         return response
