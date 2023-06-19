@@ -1,4 +1,5 @@
 from handler import Handler
+# from objects.character import Character
 
 
 class Client():

@@ -1,6 +1,11 @@
+from dataclasses import dataclass
+
 @dataclass
 class Character():
-    cid: int
     name: str
-    description: str
-    
+    title: str
+    desc: str
+    partype: str
+    tags: list
+    info: dict
+    stats: dict
