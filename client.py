@@ -10,6 +10,14 @@ class Client():
         self.continent = continent
         self.region = region
         self.handler = Handler(self.api_key, self.continent, self.region)
+
+        # self.cache = { 'champions': {}, 'items': {}, 'summoner_spells': {} }
+        self.champion_cache = {}
+        self.item_cache = {}
+        self.summoner_spell_cache = {}
+
+        self.__get_all_champions()
+
         
     def get_summoner(self, summoner_name):
         response = self.handler('GET', 'summoner', summonerName=summoner_name)
@@ -41,24 +49,26 @@ class Client():
         return response
     
     # data dragon api
-    def get_all_champions(self):
+    def __get_all_champions(self):
         response = self.handler('GET', 'all_champion_data', ddragon_route=True)
         data = response['data']
-        
-        champions_list = []
 
         for c in data.values():
-            champions_list.append(Character(c['name'], c['title'], c['blurb'], c['partype'], \
-                                            c['tags'], c['info'], c['stats']))
+            test = Character(c['key'], c['name'], c['title'], c['blurb'], \
+                             c['partype'], c['tags'], c['info'], c['stats'])
+            
+            self.champion_cache[c['key']] = test
+            break
 
-        return champions_list
+    
+    
     
     def get_items(self):
         response = self.handler('GET', 'items', ddragon_route=True)
         
-        return response
+        
     
     def get_summoner_spells(self):
         response = self.handler('GET', 'summoner_spells', ddragon_route=True)
         
-        return response
+        
