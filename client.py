@@ -1,5 +1,7 @@
 from handler import Handler
-# from objects.character import Character
+from objects.account import Account
+from objects.character import Character
+from objects.spell import Spell
 
 
 class Client():
@@ -9,7 +11,6 @@ class Client():
         self.region = region
         self.handler = Handler(self.api_key, self.continent, self.region)
         
-
     def get_summoner(self, summoner_name):
         response = self.handler('GET', 'summoner', summonerName=summoner_name)
 
@@ -40,10 +41,17 @@ class Client():
         return response
     
     # data dragon api
-    def get_champions(self):
+    def get_all_champions(self):
         response = self.handler('GET', 'all_champion_data', ddragon_route=True)
+        data = response['data']
         
-        return response
+        champions_list = []
+
+        for c in data.values():
+            champions_list.append(Character(c['name'], c['title'], c['blurb'], c['partype'], \
+                                            c['tags'], c['info'], c['stats']))
+
+        return champions_list
     
     def get_items(self):
         response = self.handler('GET', 'items', ddragon_route=True)
