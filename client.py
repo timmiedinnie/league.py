@@ -40,17 +40,17 @@ class Client():
         return response
     
     # data dragon api
-    def get_champion_data(self):
+    def get_champions(self):
         response = self.handler('GET', 'all_champion_data', version=self.ddragon_version)
         
         return response
     
-    def get_item_data(self):
+    def get_items(self):
         response = self.handler('GET', 'items', version=self.ddragon_version)
         
         return response
     
-    def get_summoner_spell_data(self):
+    def get_summoner_spells(self):
         response = self.handler('GET', 'summoner_spells', version=self.ddragon_version)
         
         return response
