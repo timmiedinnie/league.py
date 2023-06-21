@@ -58,7 +58,7 @@ class Lexicon():
 
     _DATA_DRAGON = {
         'dd_root': 'http://ddragon.leagueoflegends.com/cdn/{version}/',
-        'all_champion_data': 'data/en_US/champion.json',  # get champion data
+        'all_champion_data': 'data/en_US/champion.json',  # get champion data (does not provide full champ info, will need to switch to champ_data endpoint)
         # 'champion_data': 'data/en_US/champion/{championName}.json',  # get champion data by champion name
         'items': 'data/en_US/item.json',  # get item data
         'summoner_spells': 'data/en_US/summoner.json',  # get summoner spell data
