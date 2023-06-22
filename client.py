@@ -12,9 +12,11 @@ class Client():
         self.continent = continent
         self.region = region
         self.handler = Handler(self.api_key, self.continent, self.region)
+        
         self.cache = Cache()
         self.__get_all_champions()
         self.__get_items()
+        self.__get_summoner_spells()
 
     # data dragon api
     def __get_all_champions(self):
@@ -32,16 +34,26 @@ class Client():
     def __get_items(self):
         response = self.handler('GET', 'items', ddragon_route=True)
         data = response['data']
-        import json
+        
         for iid, itm in data.items():
             item = Item(itm['name'], itm['plaintext'], itm['into'] if 'into' in itm else [], \
                         itm['gold']['total'], itm['gold']['sell'], itm['tags'], itm['stats'])
+            
             self.cache.items[iid] = item
 
         print('DDragon: Items loaded.')
 
-    def get_summoner_spells(self):
+    def __get_summoner_spells(self):
         response = self.handler('GET', 'summoner_spells', ddragon_route=True)
+        data = response['data']
+
+        for s in data.values():
+            spell = Spell(s['name'], s['description'], s['cooldown'][0], \
+                            s['cost'][0], s['summonerLevel'], s['range'][0])
+
+            self.cache.summoner_spells[s['key']] = spell
+
+        print('DDragon: Summoner spells loaded.')
 
     # quality of life methods
     def get_champion(self, champion_id):    
