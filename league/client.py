@@ -5,14 +5,33 @@ from .objects import *
 class Client():
     def __init__(self, api_key, continent='ASIA', region='SG2'):
         self.api_key = api_key
-        self.continent = continent
-        self.region = region
-        self.handler = Handler(self.api_key, self.continent, self.region)
+        self._continent = continent
+        self._region = region
+        self.handler = Handler(self.api_key, self._continent, self._region)
         
         self.cache = Cache()
         self.__get_all_champions()
         self.__get_items()
         self.__get_summoner_spells()
+
+    # getters and setters
+    @property
+    def continent(self):
+        return self._continent
+    
+    @continent.setter
+    def continent(self, continent):
+        self._continent = continent
+        self.handler.continent = continent
+
+    @property
+    def region(self):
+        return self._region
+    
+    @region.setter
+    def region(self, region):
+        self._region = region
+        self.handler.region = region
 
     # data dragon api
     def __get_all_champions(self):
