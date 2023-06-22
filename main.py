@@ -19,6 +19,7 @@ if __name__ == '__main__':
     # champion_rotation = client.get_champion_rotation()
     # pantheon = client.get_champion('80')
     # boots = client.cache.get_item('1001')
+    # ignite = client.cache.get_summoner_spell('14')
 
     # print(json.dumps(summoner, indent=4))
     # print(json.dumps(champion_masteries, indent=4))
@@ -28,3 +29,4 @@ if __name__ == '__main__':
     # print(json.dumps(champion_rotation, indent=4))
     # print(pantheon)
     # print(boots)
+    # print(ignite)
