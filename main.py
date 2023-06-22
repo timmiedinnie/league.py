@@ -1,8 +1,7 @@
 import os
 import json
-import requests
 from dotenv import load_dotenv
-from client import Client
+from league import Client
 
 load_dotenv()
 
@@ -10,8 +9,7 @@ if __name__ == '__main__':
     api_key = os.getenv('RIOT_API_KEY')
     client = Client(api_key, continent='ASIA', region='SG2')
 
-    # summoner = client.get_summoner('timtamtom')
-
+    summoner = client.get_summoner('timtamtom')
     # champion_masteries = client.get_champion_mastery(summoner['puuid'])
     # champion_mastery = client.get_champion_mastery(summoner['puuid'], championId=80)
     # top_2_champions = client.get_champion_mastery(summoner['puuid'], limit=2)
@@ -21,7 +19,7 @@ if __name__ == '__main__':
     # boots = client.cache.get_item('1001')
     # ignite = client.cache.get_summoner_spell('14')
 
-    # print(json.dumps(summoner, indent=4))
+    print(json.dumps(summoner, indent=4))
     # print(json.dumps(champion_masteries, indent=4))
     # print(json.dumps(champion_mastery, indent=4))
     # print(json.dumps(top_2_champions, indent=4))

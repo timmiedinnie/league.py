@@ -1,5 +1,5 @@
 import requests
-from lexicon import Lexicon
+from .lexicon import Lexicon
 
 
 def validate_args(*args):
@@ -37,6 +37,7 @@ class Handler():
         else:
             url = self.base.format(self.region if switch_locale else self.continent) + \
                 self.endpoints[route].format(**params)
+        
         res = self.sess.request(method, url)
         
         print(f'{method} {url} <{res.status_code} {res.reason}>')

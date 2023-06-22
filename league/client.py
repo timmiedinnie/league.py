@@ -1,22 +1,37 @@
-from handler import Handler
-from objects.account import Account
-from objects.character import Character
-from objects.item import Item
-from objects.spell import Spell
-from objects.cache import Cache
+from .handler import Handler
+from .objects import *
 
 
 class Client():
     def __init__(self, api_key, continent='ASIA', region='SG2'):
         self.api_key = api_key
-        self.continent = continent
-        self.region = region
-        self.handler = Handler(self.api_key, self.continent, self.region)
+        self._continent = continent
+        self._region = region
+        self.handler = Handler(self.api_key, self._continent, self._region)
         
         self.cache = Cache()
         self.__get_all_champions()
         self.__get_items()
         self.__get_summoner_spells()
+
+    # getters and setters
+    @property
+    def continent(self):
+        return self._continent
+    
+    @continent.setter
+    def continent(self, continent):
+        self._continent = continent
+        self.handler.continent = continent
+
+    @property
+    def region(self):
+        return self._region
+    
+    @region.setter
+    def region(self, region):
+        self._region = region
+        self.handler.region = region
 
     # data dragon api
     def __get_all_champions(self):
@@ -29,7 +44,7 @@ class Client():
             
             self.cache.champions[c['key']] = champ
         
-        print('DDragon: Champions loaded.')
+        # print('DDragon: Champions loaded.')
     
     def __get_items(self):
         response = self.handler('GET', 'items', ddragon_route=True)
@@ -41,7 +56,7 @@ class Client():
             
             self.cache.items[iid] = item
 
-        print('DDragon: Items loaded.')
+        # print('DDragon: Items loaded.')
 
     def __get_summoner_spells(self):
         response = self.handler('GET', 'summoner_spells', ddragon_route=True)
@@ -53,7 +68,7 @@ class Client():
 
             self.cache.summoner_spells[s['key']] = spell
 
-        print('DDragon: Summoner spells loaded.')
+        # print('DDragon: Summoner spells loaded.')
 
     # quality of life methods
     def get_champion(self, champion_id):    
