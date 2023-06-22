@@ -19,13 +19,12 @@ setuptools.setup(
         "Issue Tracker": url + "/issues",
     },
 
-    long_description=readme,
+    long_description=long_description,
     long_description_content_type="text/markdown",
 
     python_requires=">=3.8.0",
-
     zip_safe=False,
-    packages=['league'],
+    packages=['league', 'league.objects'],
 
     classifiers=[
         "License :: OSI Approved :: MIT License",
