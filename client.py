@@ -1,4 +1,9 @@
 from handler import Handler
+from objects.account import Account
+from objects.character import Character
+from objects.item import Item
+from objects.spell import Spell
+from objects.cache import Cache
 
 
 class Client():
@@ -8,7 +13,59 @@ class Client():
         self.region = region
         self.handler = Handler(self.api_key, self.continent, self.region)
         
+        self.cache = Cache()
+        self.__get_all_champions()
+        self.__get_items()
+        self.__get_summoner_spells()
 
+    # data dragon api
+    def __get_all_champions(self):
+        response = self.handler('GET', 'all_champion_data', ddragon_route=True)
+        data = response['data']
+
+        for c in data.values():
+            champ = Character(c['name'], c['title'], c['blurb'], \
+                             c['partype'], c['tags'], c['info'], c['stats'])
+            
+            self.cache.champions[c['key']] = champ
+        
+        print('DDragon: Champions loaded.')
+    
+    def __get_items(self):
+        response = self.handler('GET', 'items', ddragon_route=True)
+        data = response['data']
+        
+        for iid, itm in data.items():
+            item = Item(itm['name'], itm['plaintext'], itm['into'] if 'into' in itm else [], \
+                        itm['gold']['total'], itm['gold']['sell'], itm['tags'], itm['stats'])
+            
+            self.cache.items[iid] = item
+
+        print('DDragon: Items loaded.')
+
+    def __get_summoner_spells(self):
+        response = self.handler('GET', 'summoner_spells', ddragon_route=True)
+        data = response['data']
+
+        for s in data.values():
+            spell = Spell(s['name'], s['description'], s['cooldown'][0], \
+                            s['cost'][0], s['summonerLevel'], s['range'][0])
+
+            self.cache.summoner_spells[s['key']] = spell
+
+        print('DDragon: Summoner spells loaded.')
+
+    # quality of life methods
+    def get_champion(self, champion_id):    
+        return self.cache.get_champion(champion_id)
+    
+    def get_item(self, item_id):
+        pass
+
+    def get_summoner_spell(self, spell_id):
+        pass
+
+    # riot api
     def get_summoner(self, summoner_name):
         response = self.handler('GET', 'summoner', summonerName=summoner_name)
 
@@ -36,20 +93,4 @@ class Client():
     def get_champion_rotation(self):
         response = self.handler('GET', 'champion_rotation')
         
-        return response
-    
-    # data dragon api
-    def get_champions(self):
-        response = self.handler('GET', 'all_champion_data', ddragon_route=True)
-        
-        return response
-    
-    def get_items(self):
-        response = self.handler('GET', 'items', ddragon_route=True)
-        
-        return response
-    
-    def get_summoner_spells(self):
-        response = self.handler('GET', 'summoner_spells', ddragon_route=True)
-        
-        return response
+        return response   
