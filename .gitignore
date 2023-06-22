@@ -2,3 +2,6 @@ __pycache__
 .pytest_cache
 .env
 data_dragon
+build
+dist
+league.egg-info
