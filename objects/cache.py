@@ -9,3 +9,6 @@ class Cache():
     
     def get_item(self, item_id):
         return self.items[item_id]
+
+    def get_summoner_spell(self, spell_id):
+        return self.summoner_spells[spell_id]
