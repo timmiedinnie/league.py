@@ -1,9 +1,5 @@
-from handler import Handler
-from objects.account import Account
-from objects.character import Character
-from objects.item import Item
-from objects.spell import Spell
-from objects.cache import Cache
+from .handler import Handler
+from .objects import *
 
 
 class Client():
@@ -29,7 +25,7 @@ class Client():
             
             self.cache.champions[c['key']] = champ
         
-        print('DDragon: Champions loaded.')
+        # print('DDragon: Champions loaded.')
     
     def __get_items(self):
         response = self.handler('GET', 'items', ddragon_route=True)
@@ -41,7 +37,7 @@ class Client():
             
             self.cache.items[iid] = item
 
-        print('DDragon: Items loaded.')
+        # print('DDragon: Items loaded.')
 
     def __get_summoner_spells(self):
         response = self.handler('GET', 'summoner_spells', ddragon_route=True)
@@ -53,7 +49,7 @@ class Client():
 
             self.cache.summoner_spells[s['key']] = spell
 
-        print('DDragon: Summoner spells loaded.')
+        # print('DDragon: Summoner spells loaded.')
 
     # quality of life methods
     def get_champion(self, champion_id):    
