@@ -1,6 +1,7 @@
 from handler import Handler
 from objects.account import Account
 from objects.character import Character
+from objects.item import Item
 from objects.spell import Spell
 from objects.cache import Cache
 
@@ -13,6 +14,7 @@ class Client():
         self.handler = Handler(self.api_key, self.continent, self.region)
         self.cache = Cache()
         self.__get_all_champions()
+        self.__get_items()
 
     # data dragon api
     def __get_all_champions(self):
@@ -24,10 +26,20 @@ class Client():
                              c['partype'], c['tags'], c['info'], c['stats'])
             
             self.cache.champions[c['key']] = champ
+        
+        print('DDragon: Champions loaded.')
     
-    def get_items(self):
+    def __get_items(self):
         response = self.handler('GET', 'items', ddragon_route=True)
-    
+        data = response['data']
+        import json
+        for iid, itm in data.items():
+            item = Item(itm['name'], itm['plaintext'], itm['into'] if 'into' in itm else [], \
+                        itm['gold']['total'], itm['gold']['sell'], itm['tags'], itm['stats'])
+            self.cache.items[iid] = item
+
+        print('DDragon: Items loaded.')
+
     def get_summoner_spells(self):
         response = self.handler('GET', 'summoner_spells', ddragon_route=True)
 
